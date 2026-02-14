@@ -3,10 +3,10 @@
 
 class Plant():
     """Represent a plant that can grow and age over time"""
-    def __init__(self, name, height, age) -> None:
-        self.name: str = name
-        self.height: int = height
-        self.age: int = age
+    def __init__(self, name: str, height: int, age: int) -> None:
+        self.name = name
+        self.height = height
+        self.age = age
 
     def grow(self) -> None:
         """Increase plant height by 1cm"""

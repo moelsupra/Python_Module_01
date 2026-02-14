@@ -6,11 +6,11 @@ class Plant():
     Represents a plant in the garden
     Attributes Name, Height, Age of plant
     """
-    def __init__(self, name, height, age) -> None:
+    def __init__(self, name: str, height: int, age: int) -> None:
         """Initialize a new plant Args : Name ..."""
-        self.name: str = name
-        self.height: int = height
-        self.age: int = age
+        self.name = name
+        self.height = height
+        self.age = age
 
     def info(self) -> None:
         """Display plant information"""
