@@ -1,5 +1,5 @@
 def main() -> None:
-    """Dislay information about a plant in the garden."""
+    """Display information about a plant in the garden."""
     name: str = "Rose"
     height: int = 25
     age: int = 30
