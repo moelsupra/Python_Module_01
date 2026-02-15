@@ -40,8 +40,10 @@ class Tree(Plant):
 
     def produce_shade(self) -> None:
         """Calculate and display the shade area produced by the tree"""
-        shade_area = self.trunk_diameter * 1.5 + 3
-        print(f"{self.name} provides {shade_area:.0f} square meters of shade")
+        crown_diameter_m = (self.trunk_diameter * 20) / 100
+        pi: float = 3.14159265
+        shade_area: int = int(pi * (crown_diameter_m / 2) ** 2)
+        print(f"{self.name} provides {shade_area} square meters of shade")
 
     def get_info(self) -> str:
         return super().get_data() + f", {self.trunk_diameter}cm diameter"

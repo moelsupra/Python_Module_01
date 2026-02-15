@@ -1,95 +1,3 @@
-class GardenManager:
-    """Manages multiple gardens and provides analytics"""
-    total_gardens: int = 0
-
-    class GardenStats:
-        """Nested helper class for calculating garden statistics."""
-        @staticmethod
-        def calculate_total_height(plants) -> int:
-            """Calulate total height of all plants"""
-            total: int = 0
-            for plant in plants:
-                total += plant.height
-            return total
-
-        @staticmethod
-        def count_flowering_plants(plants) -> int:
-            """Count flowering plants"""
-            count: int = 0
-            for plant in plants:
-                if plant.plant_type == "flower":
-                    count += 1
-            return count
-
-        @staticmethod
-        def count_prize_flower(plants) -> int:
-            """Count prize flowers"""
-            count: int = 0
-            for plant in plants:
-                if plant.plant_type == "prize":
-                    count += 1
-            return count
-
-    def __init__(self, owner_name: str) -> None:
-        """Initialize a new garden manager"""
-        self.owner_name = owner_name
-        self.plants = []
-        self.total_growth = 0
-        GardenManager.total_gardens += 1
-
-    def add_plant(self, plant) -> None:
-        """Add plant to the garden"""
-        self.plants.append(plant)
-        print(f"Added {plant.name} to {self.owner_name}'s garden")
-
-    def help_all_plant_grow(self) -> None:
-        """Make all plants grow by 1cm"""
-        print(f"\n{self.owner_name} is helping all plants grow...")
-        for plant in self.plants:
-            plant.height += 1
-            self.total_growth += 1
-            print(f"{plant.name} grew 1cm")
-
-    def get_report(self) -> None:
-        """Display reprot of the garden"""
-        print(f"=== {self.owner_name}'s Garden Report ===")
-        print("Plants in garden:")
-        for plant in self.plants:
-            print(f"- {plant.get_info()}")
-
-        flowering_count = self.GardenStats.count_flowering_plants(self.plants)
-        prize_count = self.GardenStats.count_prize_flower(self.plants)
-        total_plants = len(self.plants)
-
-        regular_count = total_plants - flowering_count - prize_count
-
-        print(
-            f"\nPlants added: {total_plants}, "
-            f"Total growth: {self.total_growth}cm"
-        )
-        print(
-            f"Plant types: {regular_count} regular, "
-            f"{flowering_count} flowering, {prize_count} prize flowers"
-        )
-
-    def calculate_score(self) -> int:
-        """Calculate garden score based on total plant height"""
-        return self.GardenStats.calculate_total_height(self.plants)
-
-    @classmethod
-    def create_garden_network(cls, owner_names) -> list:
-        """Create multiple gardens at once"""
-        gardens = []
-        for name in owner_names:
-            gardens.append(cls(name))
-        return gardens
-
-    @classmethod
-    def get_total_gardens(cls) -> int:
-        """Get total number of gardens created"""
-        return cls.total_gardens
-
-
 class Plant:
     """Class representing regular plant"""
     plant_type = "regular"
@@ -150,6 +58,100 @@ class PrizeFlower(FloweringPlant):
     def get_info(self) -> str:
         """Get plant information"""
         return super().get_info() + f", Prize points: {self.prize}"
+
+
+class GardenManager:
+    """Manages multiple gardens and provides analytics"""
+    total_gardens: int = 0
+
+    class GardenStats:
+        """Nested helper class for calculating garden statistics."""
+        @staticmethod
+        def calculate_total_height(plants: list[Plant]) -> int:
+            """Calulate total height of all plants"""
+            total: int = 0
+            for plant in plants:
+                total += plant.height
+            return total
+
+        @staticmethod
+        def count_flowering_plants(plants: list[Plant]) -> int:
+            """Count flowering plants"""
+            count: int = 0
+            for plant in plants:
+                if plant.plant_type == "flower":
+                    count += 1
+            return count
+
+        @staticmethod
+        def count_prize_flower(plants: list[Plant]) -> int:
+            """Count prize flowers"""
+            count: int = 0
+            for plant in plants:
+                if plant.plant_type == "prize":
+                    count += 1
+            return count
+
+    def __init__(self, owner_name: str) -> None:
+        """Initialize a new garden manager"""
+        self.owner_name = owner_name
+        self.plants: list[Plant] = []
+        self.total_growth = 0
+        GardenManager.total_gardens += 1
+
+    def add_plant(self, plant: Plant) -> None:
+        """Add plant to the garden"""
+        self.plants.append(plant)
+        print(f"Added {plant.name} to {self.owner_name}'s garden")
+
+    def help_all_plant_grow(self) -> None:
+        """Make all plants grow by 1cm"""
+        print(f"\n{self.owner_name} is helping all plants grow...")
+        for plant in self.plants:
+            plant.height += 1
+            self.total_growth += 1
+            print(f"{plant.name} grew 1cm")
+
+    def get_report(self) -> None:
+        """Display reprot of the garden"""
+        print(f"=== {self.owner_name}'s Garden Report ===")
+        print("Plants in garden:")
+        for plant in self.plants:
+            print(f"- {plant.get_info()}")
+
+        flowering_count = self.GardenStats.count_flowering_plants(self.plants)
+        prize_count = self.GardenStats.count_prize_flower(self.plants)
+        total_plants: int = 0
+        for _ in self.plants:
+            total_plants += 1
+
+        regular_count = total_plants - flowering_count - prize_count
+
+        print(
+            f"\nPlants added: {total_plants}, "
+            f"Total growth: {self.total_growth}cm"
+        )
+        print(
+            f"Plant types: {regular_count} regular, "
+            f"{flowering_count} flowering, {prize_count} prize flowers"
+        )
+
+    def calculate_score(self) -> int:
+        """Calculate garden score based on total plant height"""
+        return self.GardenStats.calculate_total_height(self.plants)
+
+    @classmethod
+    def create_garden_network(cls, owner_names: list[str]) -> list:
+        """Create multiple gardens at once"""
+        gardens = []
+        for name in owner_names:
+            gardens.append(cls(name))
+        return gardens
+
+    @classmethod
+    def get_total_gardens(cls) -> int:
+        """Get total number of gardens created"""
+        return cls.total_gardens
 
 
 if __name__ == "__main__":
