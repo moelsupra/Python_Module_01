@@ -1,13 +1,11 @@
-"""Demonstrate inheritance by creating specialized plant types"""
-
-
 class Plant:
+    """Blueprint for a plant."""
     def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name
         self.height = height
         self.age = age
 
-    def get_data(self) -> str:
+    def get_info(self) -> str:
         """Return data of plant attributs"""
         cls_name = self.__class__.__name__
         return (f"{self.name} ({cls_name}): {self.height}cm, {self.age} days")
@@ -26,7 +24,7 @@ class Flower(Plant):
         print(f"{self.name} is blooming beautifully!")
 
     def get_info(self) -> str:
-        return super().get_data() + f", {self.color} color"
+        return super().get_info() + f", {self.color} color"
 
 
 class Tree(Plant):
@@ -46,7 +44,7 @@ class Tree(Plant):
         print(f"{self.name} provides {shade_area} square meters of shade")
 
     def get_info(self) -> str:
-        return super().get_data() + f", {self.trunk_diameter}cm diameter"
+        return super().get_info() + f", {self.trunk_diameter}cm diameter"
 
 
 class Vegetable(Plant):
@@ -69,7 +67,7 @@ class Vegetable(Plant):
         print(f"{self.name} is rich in vitamin {self.nutritional_value}")
 
     def get_info(self) -> str:
-        return super().get_data() + f", {self.harvest_season} harvest"
+        return super().get_info() + f", {self.harvest_season} harvest"
 
 
 if __name__ == "__main__":

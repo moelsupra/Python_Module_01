@@ -1,7 +1,4 @@
-"""Demonstrate efficient plant creation using the Plant class constructor"""
-
-
-class Plant():
+class Plant:
     """Represents a plant that can be created with initial values"""
     def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name

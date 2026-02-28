@@ -1,9 +1,10 @@
-""""use data validation and encapsulation to protect plant data integrity"""
-
-
-class SecurePlant():
+class SecurePlant:
+    """Blueprint for a secure garden plant."""
     def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name
+        self._height = None
+        self._age = None
+        print(f"Plant created: {name}")
         self.set_height(height)
         self.set_age(age)
 
@@ -13,17 +14,19 @@ class SecurePlant():
             print(f"Invalid operation attempted: height {height}cm [REJECTED]")
             print("Security: Negative height rejected")
         else:
+            action = "updated" if self._height is not None else "initialized"
             self._height = height
-            print(f"Height updated: {height}cm [OK]")
+            print(f"Height {action}: {height}cm [OK]")
 
     def set_age(self, age: int) -> None:
-        """Set plant height with validation"""
+        """Set plant age with validation"""
         if age < 0:
             print(f"Invalid operation attempted: age {age} days [REJECTED]")
             print("Security: Negative age rejected")
         else:
+            action = "updated" if self._age is not None else "initialized"
             self._age = age
-            print(f"Age updated: {age} days [OK]")
+            print(f"Age {action}: {age} days [OK]")
 
     def get_height(self) -> int:
         """Get the current plant height"""
@@ -34,13 +37,12 @@ class SecurePlant():
         return self._age
 
     def get_info(self) -> str:
-        """Get plant informations as formatted string"""
+        """Get plant information as formatted string"""
         return f"{self.name} ({self.get_height()}cm, {self.get_age()} days)"
 
 
 if __name__ == "__main__":
     print("=== Garden Security System ===")
-    print("Plant created: Rose")
     rose = SecurePlant("Rose", 25, 30)
     print()
     rose.set_height(-5)

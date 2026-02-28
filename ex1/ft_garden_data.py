@@ -1,10 +1,7 @@
-"""Create a Plant class to organize and display plant information"""
-
-
-class Plant():
+class Plant:
     """
     Represents a plant in the garden
-    Attributes Name, Height, Age of plant
+    Attributes: name, height, age of the plant
     """
     def __init__(self, name: str, height: int, age: int) -> None:
         """Initialize a new plant Args : Name ..."""
