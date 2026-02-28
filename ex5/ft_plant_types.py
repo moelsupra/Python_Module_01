@@ -64,7 +64,7 @@ class Vegetable(Plant):
 
     def get_nutrition_info(self) -> None:
         """Display nutritional information about the vegetable."""
-        print(f"{self.name} is rich in vitamin {self.nutritional_value}")
+        print(f"{self.name} is rich in {self.nutritional_value}")
 
     def get_info(self) -> str:
         return super().get_info() + f", {self.harvest_season} harvest"

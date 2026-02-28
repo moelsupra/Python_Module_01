@@ -173,6 +173,12 @@ class GardenManager:
     get_total_gardens = classmethod(get_total_gardens)
 
 
+def compare_garden_scores(g1: GardenManager, g2: GardenManager) -> None:
+    """Non-member function comparing two gardens."""
+    print(f"Garden scores - {g1.owner_name}: {g1.calculate_score()}, "
+          f"{g2.owner_name}: {g2.calculate_score()}")
+
+
 if __name__ == "__main__":
     alice = GardenManager("Alice")
     bob = GardenManager("Bob")
@@ -193,13 +199,14 @@ if __name__ == "__main__":
 
     # Grow plants in Alice's garden
     alice.help_all_plants_grow()
-    print()
+
     # Show reports
     alice.get_report()
 
+    print(f"\nHeight validation test: {Plant.validate_height(25)}")
+
     # Compare garden scores directly
-    print(f"\nGarden scores - {alice.owner_name}: {alice.calculate_score()}, "
-          f"{bob.owner_name}: {bob.calculate_score()}")
+    compare_garden_scores(alice, bob)
 
     # Show total gardens
-    print(f"Total gardens: {GardenManager.get_total_gardens()}")
+    print(f"Total gardens managed: {GardenManager.get_total_gardens()}")
