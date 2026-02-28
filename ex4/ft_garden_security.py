@@ -2,8 +2,8 @@ class SecurePlant:
     """Blueprint for a secure garden plant."""
     def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name
-        self._height = None
-        self._age = None
+        self._height = 0
+        self._age = 0
         print(f"Plant created: {name}")
         self.set_height(height)
         self.set_age(age)
@@ -14,7 +14,7 @@ class SecurePlant:
             print(f"Invalid operation attempted: height {height}cm [REJECTED]")
             print("Security: Negative height rejected")
         else:
-            action = "updated" if self._height is not None else "initialized"
+            action = "updated" if self._height != 0 else "initialized"
             self._height = height
             print(f"Height {action}: {height}cm [OK]")
 
@@ -24,7 +24,7 @@ class SecurePlant:
             print(f"Invalid operation attempted: age {age} days [REJECTED]")
             print("Security: Negative age rejected")
         else:
-            action = "updated" if self._age is not None else "initialized"
+            action = "updated" if self._age != 0 else "initialized"
             self._age = age
             print(f"Age {action}: {age} days [OK]")
 

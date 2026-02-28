@@ -137,8 +137,10 @@ class GardenManager:
             print(f"- {plant.get_info()}")
             total_plants += 1
 
-        flowering_count = GardenManager.GardenStats.count_flowering_plants(self.plants)
-        prize_count = GardenManager.GardenStats.count_prize_flowers(self.plants)
+        flowering_count = GardenManager.GardenStats.count_flowering_plants(
+            self.plants)
+        prize_count = GardenManager.GardenStats.count_prize_flowers(
+            self.plants)
         regular_count = total_plants - flowering_count - prize_count
 
         print(
@@ -171,40 +173,33 @@ class GardenManager:
     get_total_gardens = classmethod(get_total_gardens)
 
 
-def compare_garden_scores(g1: GardenManager, g2: GardenManager) -> None:
-    """Non-member function comparing two gardens."""
-    print(
-        f"Garden scores - {g1.owner_name}: {g1.calculate_score()}, "
-        f"{g2.owner_name}: {g2.calculate_score()}"
-    )
-
-
 if __name__ == "__main__":
-    print("=== Garden Management System Demo ===\n")
+    alice = GardenManager("Alice")
+    bob = GardenManager("Bob")
 
-    alice, bob = GardenManager.create_garden_network(["Alice", "Bob"])
-
+    # Create plants
     oak = Plant("Oak Tree", 100, 365)
     rose = FloweringPlant("Rose", 25, 30, "red", True)
     sunflower = PrizeFlower("Sunflower", 50, 45, "yellow", True, 10)
+    pine = Plant("Pine", 80, 500)
 
+    # Add plants to gardens
+    print("=== Garden Management System Demo === \n")
     alice.add_plant(oak)
     alice.add_plant(rose)
     alice.add_plant(sunflower)
-
+    bob.add_plant(pine)
     print()
+
+    # Grow plants in Alice's garden
     alice.help_all_plants_grow()
-
     print()
+    # Show reports
     alice.get_report()
 
-    print()
-    print(f"Height validation test: {Plant.validate_height(rose.height)}")
+    # Compare garden scores directly
+    print(f"\nGarden scores - {alice.owner_name}: {alice.calculate_score()}, "
+          f"{bob.owner_name}: {bob.calculate_score()}")
 
-    pine = Plant("Pine", 80, 500)
-    bob.add_plant(pine)
-
-    print()
-    compare_garden_scores(alice, bob)
-
-    print(f"Total gardens managed: {GardenManager.get_total_gardens()}")
+    # Show total gardens
+    print(f"Total gardens: {GardenManager.get_total_gardens()}")
